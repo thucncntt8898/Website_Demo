@@ -19,6 +19,7 @@
                                 <th>Loại tin</th>
                                 <td>Xem</td>
                                 <td>Nổi bật</td>
+                                <td>Hiển thị</td>
                                 <td>Delete</td>
                                 <td>Edit</td>
 
@@ -27,7 +28,9 @@
                         <tbody>
                             @foreach($tintuc as $tt)
                             <tr class="odd gradeX" align="center">
-                                <td>{{$tt->id}}</td>
+                                <td>{{$tt->id}}
+                                    <a href="admin/doc/{{$tt->id}}" target="_blank">Xem chi tiết</a>
+                                </td>
                                 <td>{{$tt->TieuDe}}<br>
                                     <img src="upload/tintuc/{{$tt->Hinh}}" alt="{{$tt->tomtat}}" style="width: 100px;height: 100px;">
                                 </td>
@@ -36,6 +39,11 @@
                                 <td>{{$tt->loaitin->Ten}}</td>
                                 <td>{{$tt->SoLuotXem}}</td>
                                 <td>@if($tt->NoiBat===0)
+                                    {{"Khong"}}
+                                    @else
+                                    {{"Co"}}
+                                @endif</td>
+                                <td>@if($tt->active===0)
                                     {{"Khong"}}
                                     @else
                                     {{"Co"}}

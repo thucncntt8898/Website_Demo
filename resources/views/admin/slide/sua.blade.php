@@ -4,46 +4,45 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>Edit</small>
+                        <h1 class="page-header">Slide
+                            <small>Sửa</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        <form action="" method="POST">
-                            <div class="form-group">
-                                <label>Category Parent</label>
-                                <select class="form-control">
-                                    <option value="0">Please Choose Category</option>
-                                    <option value="">Tin Tức</option>
-                                </select>
+                        @if(count($errors)>0)
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $err)
+                                 {{$err}}<br>
+                                @endforeach
                             </div>
+                        @endif
+                        @if(session('thong bao'))
+                        <div class="alert alert-success">
+                            {{session('thong bao')}}
+                        </div>
+                        @endif
+                        <form action="admin/slide/sua/{{$slide->id}}" method="POST" enctype="multipart/form-data">
+                             @csrf
                             <div class="form-group">
-                                <label>Category Name</label>
-                                <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
-                            </div>
-                            <div class="form-group">
-                                <label>Category Order</label>
-                                <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order" />
-                            </div>
-                            <div class="form-group">
-                                <label>Category Keywords</label>
-                                <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
-                            </div>
-                            <div class="form-group">
-                                <label>Category Description</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Category Status</label>
-                                <label class="radio-inline">
-                                    <input name="rdoStatus" value="1" checked="" type="radio">Visible
+                                <label>Tên
                                 </label>
-                                <label class="radio-inline">
-                                    <input name="rdoStatus" value="2" type="radio">Invisible
-                                </label>
+                                <input type="text" name="Ten" class="form-control" value="{{$slide->Ten}}">
                             </div>
-                            <button type="submit" class="btn btn-default">Category Edit</button>
+                            <div class="form-group">
+                                <label>Nội dung</label>
+                                <input class="form-control" name="NoiDung"  value="{{$slide->NoiDung}}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Link</label>
+                                <input type="url" class="form-control" name="link" value="{{$slide->link}}" />
+                            </div>
+                             <div class="form-group">
+                                <label>Hình</label>
+                                <p><img src="upload/slide/{{$slide->Hinh}}" alt="{{$slide->NoiDung}}" style="width:800;height: 300px;"></p>
+                                <input type="file" class="form-control" name="Hinh"  />
+                            </div>
+                            <button type="submit" class="btn btn-default">Slide Edit</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>

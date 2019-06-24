@@ -13,7 +13,7 @@
 							<!-- /input-group -->
 						</li>
 						<li>
-							<a><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+							<a href="admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Thể loại <span class="fa arrow"></span></a>
@@ -48,6 +48,9 @@
 								<li>
 									<a href="admin/tintuc/them">Thêm tin tức</a>
 								</li>
+								<li>
+									<a href="admin/tintuc/listNotShow">Danh sách tin tức chưa phê duyệt</a>
+								</li>
 							</ul>
 							<!-- /.nav-second-level -->
 						</li>
@@ -70,7 +73,7 @@
 									<a href="admin/user/danhsach">List User</a>
 								</li>
 								<li>
-									<a href="#">Add User</a>
+									<a href="admin/user/them">Add User</a>
 								</li>
 							</ul>
 							<!-- /.nav-second-level -->

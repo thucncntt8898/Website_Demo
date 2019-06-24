@@ -12,8 +12,13 @@ class TinTucController extends Controller
 {
     public function getDanhSach()
     {
-    	$tintuc=TinTuc::orderBy('id','DESC')->get();
+    	$tintuc=TinTuc::orderBy('id','DESC')->where('DaXem',1)->get();
     	return view('admin.tintuc.danhsach',['tintuc'=>$tintuc]);
+    }
+    public function getListNotShow()
+    {
+        $tintuc=TinTuc::orderBy('created_at','DESC')->where('DaXem',0)->get();
+        return view('admin.tintuc.listNotShow',['tintuc'=>$tintuc]);
     }
     public function getThem()
     {
@@ -42,6 +47,8 @@ class TinTucController extends Controller
         $tintuc->idLoaiTin=$request->LoaiTin;
         $tintuc->TomTat=$request->TomTat;
         $tintuc->NoiDung=$request->NoiDung;
+        $tintuc->NoiBat=$request->NoiBat;
+        $tintuc->active=$request->active;
         $tintuc->SoLuotXem=0;
         if($request->hasFile('Hinh'))
         {
@@ -82,7 +89,7 @@ class TinTucController extends Controller
         $tintuc=TinTuc::find($id);
         $this->validate($request,[
             'LoaiTin'=>'required',
-            'TieuDe'=>'required|min:3|unique:tintuc,TieuDe',
+            'TieuDe'=>'required|min:3',
             'TomTat'=>'required',
             'NoiDung'=>'required'
         ],[
@@ -98,14 +105,16 @@ class TinTucController extends Controller
         $tintuc->idLoaiTin=$request->LoaiTin;
         $tintuc->TomTat=$request->TomTat;
         $tintuc->NoiDung=$request->NoiDung;
+        $tintuc->NoiBat=$request->NoiBat;
+        $tintuc->active=$request->active;
         if($request->hasFile('Hinh'))
         {
             $file=$request->file('Hinh');
             $duoi=$file->getClientOriginalExtension();
             if($duoi!='jpg' && $duoi!='png' && $duoi!='jpeg')
             {
-                alert('Loi! Ban chi duoc chon file co duoi la jpg, png vaf jpeg.');
-                // return redirect('admin/tintuc/them')->with('thong bao','Loi! Ban chi duoc chon file co duoi la jpg, png vaf jpeg.');
+                // alert('Loi! Ban chi duoc chon file co duoi la jpg, png vaf jpeg.');
+                return redirect('admin/tintuc/them')->with('thong bao','Loi! Ban chi duoc chon file co duoi la jpg, png vaf jpeg.');
             }
             $name=$file->getClientOriginalName();
             $Hinh=str_random(4)."_".$name;
@@ -126,5 +135,36 @@ class TinTucController extends Controller
         $tintuc=TinTuc::find($id);
         $tintuc->delete();
         return redirect('admin/tintuc/danhsach');
+    }
+    public function pheduyet($id)
+    {
+        $tintuc=TinTuc::find($id);
+        $tintuc->active=1;
+        $tintuc->DaXem=1;
+        $tintuc->save();
+        return redirect('admin/tintuc/listNotShow')->with('thong bao','Phe duyet bai viet moi thanh cong');
+    }
+    public function daxem($id)
+    {
+        $tintuc=TinTuc::find($id);
+        $tintuc->DaXem=1;
+        $tintuc->save();
+        return redirect('admin/tintuc/listNotShow');
+    }
+    public function xoa($id)
+    {
+        $tintuc=TinTuc::find($id);
+        $tintuc->delete();
+        return redirect('admin/tintuc/listNotShow')->with('thong bao','Xoa bai viet thanh cong');
+    }
+    public function countListNotShow()
+    {
+        $count=TinTuc::where('DaXem','0')->count();
+        echo $count;
+    }
+    public function getDoc($id)
+    {
+        $tintuc=TinTuc::find($id);
+        return view('admin.tintuc.doc',['tintuc'=>$tintuc]);
     }
 }

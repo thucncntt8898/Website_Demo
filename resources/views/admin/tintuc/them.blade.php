@@ -61,6 +61,11 @@
                                 <label><input type="radio" name='NoiBat' value="0" checked>Không</label>&nbsp;
                                 <label><input type="radio" name='NoiBat' value="1">Có</label>
                             </div>
+                             <div class="form-group">
+                                <label>Hiển thị</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <label><input type="radio" name='active' value="0" checked>Không</label>&nbsp;
+                                <label><input type="radio" name='active' value="1">Có</label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Thêm</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
                         <form>

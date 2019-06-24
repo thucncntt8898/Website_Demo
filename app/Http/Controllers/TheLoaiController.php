@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TheLoai;
+use Illuminate\Support\Facades\Auth;
 class TheLoaiController extends Controller
 {
     //
@@ -50,7 +51,7 @@ class TheLoaiController extends Controller
     	$theloai->Ten=$request->Ten;
     	$theloai->TenKhongDau=changeTitle($request->Ten);
     	$theloai->save();
-    	return redirect('admin/theloai/them')->with('thong bao','Success');
+    	return redirect('admin/theloai/danhsach')->with('thong bao','Success');
     }
     public function getXoa($id)
     {

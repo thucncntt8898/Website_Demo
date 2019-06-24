@@ -66,6 +66,11 @@
                                 <label><input type="radio" name='NoiBat' value="0" @if($tintuc->NoiBat==0) {{"checked"}} @endif>Không</label>&nbsp;
                                 <label><input type="radio" name='NoiBat' value="1" @if($tintuc->NoiBat==1) {{"checked"}} @endif>Có</label>
                             </div>
+                            <div class="form-group">
+                                <label>Hiển thị</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label><input type="radio" name='active' value="0" @if($tintuc->active==0) {{"checked"}} @endif>Không</label>&nbsp;
+                                <label><input type="radio" name='active' value="1" @if($tintuc->active==1) {{"checked"}} @endif>Có</label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Sửa</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
                         <form>

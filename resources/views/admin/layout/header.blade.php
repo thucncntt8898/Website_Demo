@@ -6,27 +6,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Admin</a>
+                <a class="navbar-brand" href="admin">Admin Management</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
+                @if(Auth::check())
+                <a href="admin/tintuc/listNotShow" class="btn btn-primary">Ban co <span id="notification"></span> bai viet chua phe duyet</a>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <img src="upload/avatar/{{Auth::user()->avatar}}" alt="Avatar" style="width:50px;height:50px;border-radius: 30px;">  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a><i class="fa fa-user fa-fw"></i> {{Auth::user()->name}}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="admin/user/sua/{{Auth::user()->id}}"><i class="fa fa-gear fa-fw"></i>Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="admin/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
+                @endif
+
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
@@ -34,3 +38,4 @@
             @include('admin.layout.menu')
             <!-- /.navbar-static-side -->
         </nav>
+        
